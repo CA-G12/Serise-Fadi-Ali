@@ -1,0 +1,55 @@
+const createMovieCard = (obj) => {
+  const section = document.createElement('section');
+  section.classList.add('cart');
+  const divContainer = document.createElement('div');
+  divContainer.classList.add('container');
+  section.appendChild(divContainer);
+
+  const divImage = document.createElement('div');
+  divImage.classList.add('image');
+  const image = document.createElement('img');
+  image.setAttribute('src', obj.src);
+  divImage.appendChild(image);
+  divContainer.appendChild(divImage);
+
+  const divContent = document.createElement('div');
+  divContent.classList.add('content');
+  const h2Element = document.createElement('h2');
+  const h2Text = document.createTextNode(obj.name);
+  h2Element.appendChild(h2Text);
+  divContent.appendChild(h2Element);
+  divContainer.appendChild(divContent);
+
+  const pELementDiscription = document.createElement('p');
+  const pTextDiscription = document.createTextNode(obj.discription);
+  pELementDiscription.appendChild(pTextDiscription);
+  divContent.appendChild(pELementDiscription);
+
+  const pElementLanguage = document.createElement('p');
+  const pTextLanguage = document.createTextNode(`language:  ${obj.language}`);
+  pElementLanguage.appendChild(pTextLanguage);
+  divContent.appendChild(pElementLanguage);
+
+  const pElementPremierd = document.createElement('p');
+  const pTextPremierd = document.createTextNode(`premiered:  ${obj.premiered}`);
+  pElementPremierd.appendChild(pTextPremierd);
+  divContent.appendChild(pElementPremierd);
+
+  const pElementEnded = document.createElement('p');
+  const pTextEnded = document.createTextNode(`ended:  ${obj.ended}`);
+  pElementEnded.appendChild(pTextEnded);
+  divContent.appendChild(pElementEnded);
+
+  const body = document.getElementsByTagName('body')[0];
+  body.appendChild(section);
+};
+const data = {
+  name: 'Name film',
+  src: 'https://pic.i7lm.com/wp-content/uploads/2019/10/Robin-Hood-%D8%A7%D8%AC%D9%85%D9%84-%D8%B5%D9%88%D8%B1-%D8%A7%D9%83%D8%B4%D9%86-%D8%A7%D8%AC%D9%86%D8%A8%D9%8A.jpg',
+  discription: 'Lorem ipsum dolor cvkljbhlkdhbkjhbdkjhbdkjbkjhklsit amet, consectetur adipisicing elit. Eligendi et exercitationem aperiam?',
+  language: 'English',
+  premiered: '2011-09-20',
+  ended: '2011-09-20',
+};
+
+createMovieCard(data);
