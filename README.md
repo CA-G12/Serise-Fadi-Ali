@@ -1,5 +1,5 @@
 # Serise-Fadi-Ali
-[Live Link]()
+[Live Link](https://series-fa.herokuapp.com/)
 ## Description
 FA App lets you search for your favorite tv show and it provides you with information about it, icluding ratings, number of seasons, and many more usefull information. 
 
