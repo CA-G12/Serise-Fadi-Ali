@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const seriesList = require('./seriesList');
+
 const mimeType = {
   js: 'text/js',
   json: 'application/json',
@@ -32,6 +34,21 @@ const router = (req, res) => {
         res.writeHead(200, { 'Content-Type': mimeType[extension] });
         res.end(data);
       }
+    });
+  } else if (endpoint === '/seriee-search' && req.method === 'POST') {
+    let allData = '';
+    req.on('data', (chunk) => {
+      allData += chunk;
+    });
+    req.on('end', () => {
+      const data = JSON.parse(allData);
+      const results = seriesList.filter((seriee) => {
+        if (seriee.toLowerCase().includes(data.toLowerCase())) {
+          return seriee;
+        }
+      });
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(results));
     });
   } else {
     res.writeHead(404);
