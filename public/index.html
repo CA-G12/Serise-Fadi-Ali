@@ -14,14 +14,15 @@
     <section class="main-content">
         <header class="header">
             <section class="title">
-                <p class="title-text">Search For Your Favoirt Movie</p>
+                <p class="title-text">Search For Your Favoirt TV-Show</p>
             </section>
         </header>
         <form action="/seriee-search" method="POST">
         <section class="content">
             <section class="search-bar title-card">
-                <input type="search" id="searchBar" placeholder="Ex: HIMYM">
+                <input list="series" type="search" id="searchBar" placeholder="Ex: HIMYM">
                 <button type="submit" id="searchBtn">Search</button>
+                <datalist id="series"></datalist>
             </section>
         </section>
     </form>
