@@ -1,5 +1,5 @@
 const seriesList = require('../seriesList');
-const response = require('./response');
+const response = require('./genaricResponse');
 
 const search = (req, res) => {
   let allData = '';
@@ -8,11 +8,7 @@ const search = (req, res) => {
   });
   req.on('end', () => {
     const data = JSON.parse(allData);
-    const results = seriesList.filter((seriee) => {
-      if (seriee.toLowerCase().includes(data.toLowerCase())) {
-        return seriee;
-      }
-    });
+    const results = response.filterResults(seriesList, data);
     response.success(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify(results));
   });
 };
