@@ -72,8 +72,24 @@ const createMovieCard = (obj) => {
   btnWatch.appendChild(btnWatchText);
   divContent.appendChild(btnWatch);
 
+  const card = document.createElement('div');
+  card.classList.add('card');
+  const cardContainer = document.createElement('div');
+  cardContainer.classList.add('container');
+  card.appendChild(cardContainer);
+
+  for (let i = 0; i <= 4; i++) {
+    const cardImageDiv = document.createElement('div');
+    cardImageDiv.classList.add('card-image');
+    const imageCard = document.createElement('img');
+    imageCard.setAttribute('src', obj.src);
+    cardImageDiv.appendChild(imageCard);
+    cardContainer.appendChild(cardImageDiv);
+  }
+
   const body = document.getElementsByTagName('body')[0];
   body.appendChild(section);
+  body.appendChild(card)
 };
 
 const data = {
