@@ -62,3 +62,24 @@
   font-size:  1.3rem;
   color: #E8F9FD;
 }
+
+.btn{
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  padding: 1rem;
+  display: inline-block;
+  background-color: #ff1e00;
+  border-radius: 3%;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn.left{
+  margin-right: 1.5rem;
+}
+
+.btn:hover{
+  color: #E8F9FD;
+  font-weight:500 ;
+}
