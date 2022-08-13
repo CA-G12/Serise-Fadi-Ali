@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+const querystring = require('querystring');
 
 const seriesList = require('./seriesList');
+const seriesRoute = require('./movies');
 
 const mimeType = {
   js: 'text/js',
@@ -50,6 +52,25 @@ const router = (req, res) => {
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(results));
     });
+  } else if (endpoint === '/movies' && req.method === 'GET') {
+    seriesRoute.movies(req, res);
+  } else if (endpoint === '/movies' && req.method === 'POST') {
+    let allData = '';
+    req.on('data', (chunk) => {
+      allData += chunk;
+    });
+    req.on('end', () => {
+      const seriesName = querystring.parse(allData);
+      fetch(seriesName, (data) => {
+        console.log(data);
+        res.writeHead(302, { Location: '/movies' });
+        res.end(data);
+      });
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end();
+    });
+  } else if (endpoint.includes('/public/pages/series/')) {
+    seriesRoute.seriesStaticFiles(req, res);
   } else {
     res.writeHead(404);
     res.end('Page not found');
