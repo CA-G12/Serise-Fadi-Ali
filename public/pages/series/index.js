@@ -7,15 +7,15 @@ const getMovie = (movieName) => {
 };
 
 const cb = (data) => {
+  console.log(data);
   const obj = JSON.parse(JSON.stringify(data));
-  console.log(obj);
   createMovieCard(obj[0]);
+  seriesSeasons(data);
 };
 
 getMovie(movieName);
 
 const createMovieCard = (obj) => {
-  console.log(obj);
   const section = document.createElement('section');
   section.classList.add('cart');
   const divContainer = document.createElement('div');
@@ -57,7 +57,7 @@ const createMovieCard = (obj) => {
   divContent.appendChild(pElementEnded);
 
   const btnHome = document.createElement('a');
-  const btnHomeText = document.createTextNode('Offical Site');
+  const btnHomeText = document.createTextNode('Oficial Website');
   btnHome.setAttribute('href', obj.show.officialSite);
   btnHome.classList.add('btn');
   btnHome.classList.add('right');
@@ -65,40 +65,38 @@ const createMovieCard = (obj) => {
   divContent.appendChild(btnHome);
 
   const btnWatch = document.createElement('a');
-  const btnWatchText = document.createTextNode('watch now!');
-  btnWatch.setAttribute('href', obj.show.url);
+  const btnWatchText = document.createTextNode('Retun Home!');
+  btnWatch.setAttribute('href', '/');
   btnWatch.classList.add('btn');
+  btnWatch.style.backgroundColor = '#59CE8F';
   btnWatch.classList.add('right');
   btnWatch.appendChild(btnWatchText);
   divContent.appendChild(btnWatch);
 
+  const body = document.getElementsByTagName('body')[0];
+  body.appendChild(section);
+};
+
+const seriesSeasons = (obj) => {
+  console.log(obj[0].show.image.medium);
   const card = document.createElement('div');
+  const h1 = document.createElement('h1');
+  h1.textContent = "Related Sessions";
+  card.appendChild(h1);
+
   card.classList.add('card');
   const cardContainer = document.createElement('div');
   cardContainer.classList.add('container');
   card.appendChild(cardContainer);
 
-  for (let i = 0; i <= 4; i++) {
+  for (let i = 0; i <= obj.length; i++) {
     const cardImageDiv = document.createElement('div');
     cardImageDiv.classList.add('card-image');
     const imageCard = document.createElement('img');
-    imageCard.setAttribute('src', obj.src);
+    imageCard.setAttribute('src', obj[0].show.image.medium);
     cardImageDiv.appendChild(imageCard);
     cardContainer.appendChild(cardImageDiv);
   }
-
   const body = document.getElementsByTagName('body')[0];
-  body.appendChild(section);
-  body.appendChild(card)
-};
-
-const data = {
-  name: 'Name film',
-  src: 'https://pic.i7lm.com/wp-content/uploads/2019/10/Robin-Hood-%D8%A7%D8%AC%D9%85%D9%84-%D8%B5%D9%88%D8%B1-%D8%A7%D9%83%D8%B4%D9%86-%D8%A7%D8%AC%D9%86%D8%A8%D9%8A.jpg',
-  discription: 'Lorem ipsum dolor cvkljbhlkdhbkjhbdkjhbdkjbkjhklsit amet, consectetur adipisicing elit. Eligendi et exercitationem aperiam?',
-  language: 'English',
-  premiered: '2011-09-20',
-  ended: '2011-09-20',
-};
-
-
+  body.appendChild(card);
+}
