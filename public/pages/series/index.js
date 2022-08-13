@@ -40,6 +40,22 @@ const createMovieCard = (obj) => {
   pElementEnded.appendChild(pTextEnded);
   divContent.appendChild(pElementEnded);
 
+  const btnHome = document.createElement('a');
+  const btnHomeText = document.createTextNode('home');
+  btnHome.setAttribute('href', '../../index.html');
+  btnHome.classList.add('btn');
+  btnHome.classList.add('right');
+  btnHome.appendChild(btnHomeText);
+  divContent.appendChild(btnHome);
+
+  const btnWatch = document.createElement('a');
+  const btnWatchText = document.createTextNode('watch now!');
+  btnWatch.setAttribute('href', '.#');
+  btnWatch.classList.add('btn');
+  btnWatch.classList.add('right');
+  btnWatch.appendChild(btnWatchText);
+  divContent.appendChild(btnWatch);
+
   const body = document.getElementsByTagName('body')[0];
   body.appendChild(section);
 };
