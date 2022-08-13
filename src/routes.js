@@ -1,59 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-
-const seriesList = require('./seriesList');
-
-const mimeType = {
-  js: 'text/js',
-  json: 'application/json',
-  png: 'image/png',
-  css: 'text/css',
-};
+const handlers = require('./handlers/handlers');
 
 const router = (req, res) => {
   const endpoint = req.url;
-  const filePath = path.join(__dirname, '..', 'public', 'index.html');
-  if (endpoint === '/') {
-    fs.readFile(filePath, (err, data) => {
-      if (err) {
-        res.writeHead(500);
-        res.end('Internal Error');
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end(data);
-      }
-    });
-  } else if (endpoint.includes('public')) {
-    const mediaFilePath = path.join(__dirname, '..', endpoint);
-    const extension = endpoint.split('.')[1];
-    fs.readFile(mediaFilePath, (err, data) => {
-      if (err) {
-        res.writeHead(500);
-        res.end('Internal Error');
-      } else {
-        res.writeHead(200, { 'Content-Type': mimeType[extension] });
-        res.end(data);
-      }
-    });
-  } else if (endpoint === '/seriee-search' && req.method === 'POST') {
-    let allData = '';
-    req.on('data', (chunk) => {
-      allData += chunk;
-    });
-    req.on('end', () => {
-      const data = JSON.parse(allData);
-      const results = seriesList.filter((seriee) => {
-        if (seriee.toLowerCase().includes(data.toLowerCase())) {
-          return seriee;
-        }
-      });
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(results));
-    });
-  } else {
-    res.writeHead(404);
-    res.end('Page not found');
-  }
+  if (endpoint === '/') handlers.homeHandle.home(req, res);
+  else if (endpoint.includes('public')) handlers.homeHandle.homeMedeia(req, res);
+  else if (endpoint === '/seriee-search' && req.method === 'POST') handlers.searchHandle.search(req, res);
+  else if (endpoint === '/series' && req.method === 'GET') handlers.seriesHandle.series(req, res);
+  else if (endpoint.includes('/public/pages/series/')) handlers.seriesHandle.seriesStaticFiles(req, res);
+  else handlers.notFoundHandle.pageNotFound(req, res);
 };
 
 module.exports = router;
