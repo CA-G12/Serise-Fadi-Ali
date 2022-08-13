@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TV Shows</title>
     <link rel="stylesheet" href="/public/app.css">
 </head>
 
@@ -17,7 +17,7 @@
                 <p class="title-text">Search For Your Favoirt TV-Show</p>
             </section>
         </header>
-        <form action="/movies" method="POST">
+        <form action="/series" method="POST" id="form">
         <section class="content">
             <section class="search-bar title-card">
                 <input list="series" type="search" id="searchBar" name="seriesName" placeholder="Ex: HIMYM">
@@ -27,12 +27,6 @@
         </section>
     </form>
     </section>
-    <footer class="footer">
-        <section class="copyright-message">
-            <p>Copyright &copy; 2022</p>
-        </section>
-    </footer>
-
     <script src="/public/js/fetch.js"></script>
     <script src="/public/js/app.js"></script>
 </body>
