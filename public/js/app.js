@@ -8,21 +8,49 @@ const printResults = (suggestionsList) => {
   });
 };
 
+const errorMessages = (message) => {
+  const errorContainer = document.createElement('section');
+  errorContainer.classList.add('error-container');
+
+  const errorMessage = document.createElement('p');
+  errorMessage.classList.add('error');
+  errorMessage.textContent = message;
+  errorContainer.appendChild(errorMessage);
+
+  const form = document.getElementById('form');
+  form.appendChild(errorContainer);
+};
+
+const removeError = () => {
+  const errorContainer = document.querySelector('.error-container');
+  if (errorContainer) {
+    errorContainer.remove();
+  }
+};
+
 searchBar.addEventListener('input', (e) => {
+  removeError();
   const data = e.target.value;
   seriesDataList.textContent = '';
   fetch('POST', '/seriee-search', data, printResults);
 });
 
 const cb = (data) => {
-  console.log(data);
+  if (data.status === 'true') {
+    window.location = `/series?name=${data.data}`;
+  } else {
+    errorMessages('Show isn\'t found');
+  }
 };
 
 searchBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  removeError();
   const searchTerm = searchBar.value;
-  const searchTermOptimized = searchTerm.replace(/\s/g, '%20').toLowerCase();
-  const endpoint = `https://api.tvmaze.com/search/shows?q=${searchTermOptimized}`;
-  fetch('GET', endpoint, cb);
+  if (searchTerm === '') errorMessages('Please Provide a Tv Show name before Submiting');
+  else {
+    fetch('POST', '/check-search', searchTerm, cb);
+  }
 });
 
 const createOption = (data) => {
