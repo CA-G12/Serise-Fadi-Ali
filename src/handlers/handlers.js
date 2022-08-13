@@ -1,5 +1,5 @@
 const homeHandle = require('./home');
-const errorHandle = require('./response');
+const errorHandle = require('./genaricResponse');
 const seriesHandle = require('./series');
 const notFoundHandle = require('./notFound');
 const searchHandle = require('./search');
