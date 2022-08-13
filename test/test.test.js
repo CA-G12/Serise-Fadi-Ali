@@ -11,8 +11,8 @@ test('(/) Main route returns 200', (done) => {
     });
 });
 
-test('(/public/app.js) returns the js file (/) page', (done) => {
-  supertest(router).get('/public/app.js').expect(200).expect('Content-Type', 'text/js')
+test('(/public/js/app.js) returns the js file (/) page', (done) => {
+  supertest(router).get('/public/js/app.js').expect(200).expect('Content-Type', 'text/js')
     .end((err, res) => {
       if (err) return done(err);
       expect(res.statusCode).toBe(200);

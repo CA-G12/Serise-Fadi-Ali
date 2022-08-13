@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node public/app.js"
+    "start": "node public/app.js",
+    "dev": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
